@@ -18,6 +18,8 @@ const Movie = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
 
+  const [nota, setNota] = useState()
+
   const getMovie = async (url) => {
     const res = await fetch(url);
     const data = await res.json();
@@ -43,6 +45,7 @@ const Movie = () => {
         <>
           <MovieCard movie={movie} showLink={false} />
           <p className="tagline">{movie.tagline}</p>
+          <p>{nota}</p>
           <div className="info">
             <h3>
               <BsWallet2 /> Orçamento:
