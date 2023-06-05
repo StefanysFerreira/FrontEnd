@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Movie from "./pages/Movie";
 import Search from "./pages/Search";
 import Login from "./pages/Login"
+import CadastroForm from "./pages/cadastroForm";
 
 import "./index.css";
 import "./pages/EstiloLogin.css"
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route element={<App />}>
 
           <Route path="/login" element={<Login />} />
+          <Route path="/cadastrar" element={<CadastroForm />} />
           <Route path="/" element={<Home />} />   
           <Route path="movie/:id" element={<Movie />} />
           <Route path="search" element={<Search />} />
