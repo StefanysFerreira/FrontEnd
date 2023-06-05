@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import {
   BsGraphUp,
@@ -15,6 +16,7 @@ const moviesURL = import.meta.env.VITE_API;
 const apiKey = import.meta.env.VITE_API_KEY;
 
 const Movie = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
 
@@ -38,6 +40,10 @@ const Movie = () => {
     const movieUrl = `${moviesURL}${id}?${apiKey}`;
     getMovie(movieUrl);
   }, []);
+
+  function VoltarHome(){
+    navigate("/")
+  }
 
   return (
     <div className="movie-page">
@@ -72,6 +78,9 @@ const Movie = () => {
           </div>
         </>
       )}
+      <div className="retornar">
+        <button className="btnRetornar" onClick={VoltarHome}>Voltar ao início</button>
+      </div>
     </div>
   );
 };
