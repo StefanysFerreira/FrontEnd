@@ -1,0 +1,17 @@
+.avaliacao{
+    display: flex;
+    justify-content: center;
+}
+
+.contador{
+    margin: 1rem;
+}
+.positivo{
+    background: black;
+    border: none;
+}
+
+.negativo{
+    background: black;
+    border: none;
+}
