@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BiCameraMovie, BiLogIn, BiLogInCircle, BiSearchAlt2 } from "react-icons/bi";
 
 import "./Navbar.css";
+import { BsPerson } from "react-icons/bs";
 
 
 const Navbar = () => {
@@ -40,7 +41,7 @@ const Navbar = () => {
         </Link> */}
        
           <Link className="btnLogin" to="/login">
-          <BiLogIn />
+          <BsPerson />
           </Link>
 
 
