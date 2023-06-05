@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react'
 
 import "./EstiloLogin.css"
-import { BiAbacus, BiAccessibility, BiCameraHome, BiCameraMovie, BiCameraOff, BiChevronsRight } from 'react-icons/bi'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginForm(props) {
+  const navigate = useNavigate()
   const refEmail = useRef()
   const refSenha = useRef()
   const [erroEmail, setErroEmail] = useState()
@@ -28,9 +29,17 @@ export default function LoginForm(props) {
     if (erroEmail != "" || erroSenha != "") {
       return
     }
+    
+    navigate("/")
     props.onSubmit(event)
 
   }
+  function irTelaCadastro(){
+    navigate("/cadastrar")
+  }
+   function PodeAvancar() {
+    navigate("/")
+   }
   return (
     <form className="formulario" onSubmit={handleSubmit}>
       <div className="Email">
@@ -46,7 +55,11 @@ export default function LoginForm(props) {
         {erroSenha && <p class="erroSenha">{erroSenha}</p>}
       </div>
       <br></br>
-      <button className="btnEntrar">Entrar</button>
+      <button className="btnEntrar" type="submit">Entrar</button>
+      <br></br>
+      <br></br>
+      <button className="btnCadastrar" onClick={irTelaCadastro}>Cadastre-se</button>
+      
     </form>
   )
 };
