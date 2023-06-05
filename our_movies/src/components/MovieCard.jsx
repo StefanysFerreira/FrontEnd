@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import {FaThumbsDown, FaThumbsUp } from "react-icons/fa";
-import { BsHandThumbsDown } from "react-icons/bs";
+import { BsHandThumbsDown, BsHandThumbsUp } from "react-icons/bs";
 
 const imagesURL = import.meta.env.VITE_IMG;
 
@@ -11,7 +11,7 @@ const MovieCard = ({ movie, showLink = true }) => {
       <img src={imagesURL + movie.poster_path} alt={movie.title} />
       <h2>{movie.title}</h2>
       <p>
-        <BsHandThumbsDown />{movie.vote_average}</p>
+        <BsHandThumbsUp />{movie.vote_average}<BsHandThumbsDown/></p>
       {showLink && <Link to={`/movie/${movie.id}`}>Detalhes</Link>}
     </div>
   );
