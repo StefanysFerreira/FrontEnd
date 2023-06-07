@@ -1,5 +1,15 @@
+.container{
+  display: fle;
+  align-items: row center;
+}
 .container .title {
   color: #fff;
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 2rem 0 1rem;
+}
+.container .filme-erro {
+  color: red;
   font-size: 2.5rem;
   text-align: center;
   margin: 2rem 0 1rem;
@@ -60,3 +70,4 @@
   background-color: transparent;
   color: #f7d354;
 }
+
