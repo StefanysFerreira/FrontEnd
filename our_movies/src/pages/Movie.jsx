@@ -11,6 +11,7 @@ import {
 import MovieCard from "../components/MovieCard";
 
 import "./Movie.css";
+import Star from "../components/star";
 
 const moviesURL = import.meta.env.VITE_API;
 const apiKey = import.meta.env.VITE_API_KEY;
@@ -19,8 +20,6 @@ const Movie = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
-
-  const [nota, setNota] = useState()
 
   const getMovie = async (url) => {
     const res = await fetch(url);
@@ -51,7 +50,9 @@ const Movie = () => {
         <>
           <MovieCard movie={movie} showLink={false} />
           <p className="tagline">{movie.tagline}</p>
-          <p>{nota}</p>
+          <div className="rating">
+            <Star />
+          </div>
           <div className="info">
             <h3>
               <BsWallet2 /> Orçamento:
