@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaSmile, FaSmileBeam, FaSmileWink, FaStar } from "react-icons/fa";
 
 const colors = {
   orange: '#FFBA5A',
@@ -26,7 +26,9 @@ function Star() {
 
 
   return (
+    
     <div style={styles.container}>
+      <h2>Deixe sua avaliação <FaSmileWink/></h2>
       <div style={styles.stars}>
         {stars.map((_, index) => {
           return (
