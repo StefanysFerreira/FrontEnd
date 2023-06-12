@@ -40,7 +40,7 @@ const Navbar = () => {
         <BiSearchAlt2  type="submit"/>
         </Link> */}
        
-          <Link className="btnLogin" to="/login">
+          <Link className="btnIconLogin" to="/login">
           <BsPerson />
           </Link>
 

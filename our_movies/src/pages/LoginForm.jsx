@@ -1,39 +1,28 @@
-import { useRef, useState } from 'react'
+import {useForm} from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import UserContext from '../components/UserContext'
+import EmailSenha from '../components/emailSenha'
 
 import "./EstiloLogin.css"
-import { useNavigate } from 'react-router-dom'
 
 export default function LoginForm(props) {
   const navigate = useNavigate()
-  const refEmail = useRef()
-  const refSenha = useRef()
-  const [erroEmail, setErroEmail] = useState()
-  const [erroSenha, setErroSenha] = useState()
+  const [errorLogin, setErrorLogin] = useState("")
+  const { handleLogin } = useContext(UserContext)
+  const {register, handleSubmit, formState: {errors}} =useForm();
 
-  function handleSubmit(event) {
-    event.preventDefault()
-    if (!refEmail.current.value) {
-      setErroEmail("Email Obrigatório!")
-      refEmail.current.focus()
-    } else {
-      setErroEmail("")
-    }
-
-    if (!refSenha.current.value) {
-      setErroSenha("Senha Obrigatória!")
-      refSenha.current.focus()
-    } else {
-      setErroSenha("")
-    }
-
-    if (erroEmail != "" || erroSenha != "") {
-      return
-    }
-    
+  async function onSubmit(data) {
+    const { email, senha } = data;
+    setErrorLogin("")
+    try{
+    await handleLogin(email, senha)
     navigate("/")
-    props.onSubmit(event)
-
+    }catch(error) {
+      setErrorLogin(error.message)
+    }
   }
+  
   function irTelaCadastro(){
     navigate("/cadastrar")
   }
@@ -41,21 +30,11 @@ export default function LoginForm(props) {
     navigate("/")
    }
   return (
-    <form className="formulario" onSubmit={handleSubmit}>
-      <div className="Email">
-        <h1>Login</h1>
-        {/* <label htmlFor="email">Email</label> */}
-        <input type="email" id="email" name="email" ref={refEmail} placeholder="Email" />
-        {erroEmail && <p class="erroEmail">{erroEmail}</p>}
-      </div>
-      <br></br>
-      <div className="Senha">
-        {/* <label htmlFor="senha">Senha</label> */}
-        <input type="password" id="senha" name="senha" ref={refSenha} placeholder="Senha" />
-        {erroSenha && <p class="erroSenha">{erroSenha}</p>}
-      </div>
-      <br></br>
-      <button className="btnEntrar" type="submit">Entrar</button>
+    <form className="formulario" onSubmit={handleSubmit(onSubmit)}>
+      <h1>Login</h1>
+      {errorLogin && <p>{errorLogin}</p>}
+      <EmailSenha register = {register} errors= {errors}/> 
+      <button className="btnEntrar">Entrar</button>
       <br></br>
       <br></br>
       <button className="btnCadastrar" onClick={irTelaCadastro}>Cadastre-se</button>

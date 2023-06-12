@@ -1,69 +1,45 @@
-import React, { useState } from 'react';
+import {useForm} from 'react-hook-form'
 import "./cadastro.css"
+import UserContext from '../components/UserContext';
+import { useContext, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import EmailSenha from '../components/emailSenha';
+import NomeUsuario from '../components/Nome'
+
 const CadastroForm = () => {
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-
+  const {register, handleSubmit, formState: {errors}} =useForm();
+  const [erroRegistrar, setErroRegistrar] = useState()
   const navigate = useNavigate()
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const {handleRegistrar} = useContext(UserContext)
 
-    console.log('Nome:', nome);
-    console.log('Email:', email);
-    console.log('Senha:', senha);
-
-    setNome('');
-    setEmail('');
-    setSenha('');
-
+  async function onSubmit(data) {
+    const {nome, email, senha } = data;
+    setErroRegistrar("")
+    try{
+    await handleRegistrar(nome, email, senha)
     navigate("/")
-
+    }catch(error) {
+      setErroRegistrar(error.message)
+    }
   }
+  
 
   function voltarTelaLogin(){
     navigate("/login")
   }
 
   return (
-    <form className='formCadastro' onSubmit={handleSubmit}>
-      <div>
+    <form className='formCadastro' onSubmit={handleSubmit(onSubmit)}>
+      <div className='caixaNome'>
       <h1>Cadastar-se</h1>
-        <input
-          type="text"
-          id="nome"
-          value={nome}
-          onChange={(event) => setNome(event.target.value)}
-          placeholder='Insira seu nome'
-        />
+        {erroRegistrar && <p>{erroRegistrar}</p>}
       </div>
-      <br></br>
-      <div>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder='Insira seu email'
-        />
-      </div>
-      <br></br>
-      <div>
-        <input
-          type="password"
-          id="senha"
-          value={senha}
-          onChange={(event) => setSenha(event.target.value)}
-          placeholder='Insira sua senha'
-        />
-      </div>
-      <br></br>
+      <NomeUsuario register = {register} errors= {errors}/>
+      <EmailSenha register = {register} errors= {errors}/>
+      
       <button className='btnCadastro'>Cadastrar</button>
-      <br></br>
-      <br></br>
-      <button className='btnCadastro' onClick={voltarTelaLogin}>Voltar</button>
+      <button className='btnVoltarTela' onClick={voltarTelaLogin}>Voltar</button>
     </form>
   );
 };
