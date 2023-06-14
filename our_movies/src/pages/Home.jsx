@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { animateScroll as scroll } from "react-scroll";
 import MovieCard from "../components/MovieCard";
 
 import "./MoviesGrid.css";
@@ -27,6 +28,14 @@ const Home = () => {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    smoothScrollToTop();
+  };
+
+  const smoothScrollToTop = () => {
+    scroll.scrollToTop({
+      duration: 500,
+      smooth: "easeInOutQuart",
+    });
   };
 
   const renderMovies = () => {

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { animateScroll as scroll } from "react-scroll";
 import MovieCard from "../components/MovieCard";
 
 const searchURL = import.meta.env.VITE_SEARCH;
 const apiKey = import.meta.env.VITE_API_KEY;
-const itemsPerPage = 6; // Define a quantidade de filmes por página
+const itemsPerPage = 6;
 
 import "./MoviesGrid.css";
 import { FaSadCry, FaSadTear } from "react-icons/fa";
@@ -31,6 +32,14 @@ const Search = () => {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    smoothScrollToTop(); // Rolagem suave para o topo da página
+  };
+
+  const smoothScrollToTop = () => {
+    scroll.scrollToTop({
+      duration: 500,
+      smooth: "easeInOutQuart",
+    });
   };
 
   const renderMovies = () => {
