@@ -2,7 +2,7 @@ export default function NomeUsuario(props) {
   const validaNomeUsuario = {
     required: {
       value: true,
-      message: 'Nome para usuário Obrigatório!'
+      message: 'Nome de usuário Obrigatório!'
     }
   }
   return (

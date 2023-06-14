@@ -28,7 +28,7 @@ export async function logout(){
 export async function registrar(nome, email, senha) {
     return await createUserWithEmailAndPassword(auth, email, senha)
     .then((userCredential) =>{
-        // updateProfile(userCredential, {displayName: ""})
+        updateProfile(userCredential, {displayName: nome})
     userCredential.user.uid
     })  
     .catch((error) => {

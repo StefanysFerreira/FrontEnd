@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaSmile, FaSmileBeam, FaSmileWink, FaStar } from "react-icons/fa";
+import {  FaSmileWink, FaStar } from "react-icons/fa";
 
 const colors = {
   orange: '#FFBA5A',

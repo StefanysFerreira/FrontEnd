@@ -11,12 +11,12 @@ const UserContext = createContext({
 
 export function UserContextProvider(props) {
 
-  const [currentUser, setCurrentUser] = useState({ userId: null, logado: true })
+  const [currentUser, setCurrentUser] = useState({ user: null, logado: true })
 
   async function handleRegistrar(nome, email, senha) {
     try {
       const id = await registrar(nome, email, senha)
-    setCurrentUser({ userId: id, logado: true })
+    setCurrentUser({ user: id, logado: true })
     } catch(error){
       throw Error(error.message)
     }
