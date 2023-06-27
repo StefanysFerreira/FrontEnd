@@ -16,13 +16,6 @@ body {
 
   }
   
-  /* input {
-    padding: 15px;
-    border: none;
-    outline: none;
-    font-size: 15px;
-  } */
-
   .Senha {
     padding-bottom: 16px;
   }
@@ -35,6 +28,7 @@ body {
     color: gray;
     font-size: 15px;
     margin-bottom: 1px;
+    cursor: pointer;
   }
   
   .btnEntrar:hover {
@@ -50,6 +44,7 @@ body {
     color: gray;
     font-size: 15px;
     margin-bottom: 16px;
+    cursor: pointer;
   }
   
   .btnCadastrar:hover {
