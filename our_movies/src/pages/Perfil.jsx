@@ -15,6 +15,7 @@ export default function Perfil() {
         </div>
         <div className="playlist">
           <h2 className="mensagemPlaylist">Aqui estão seus filmes favoritos:</h2>
+          <h3>Não consegui fazer retornar os filmes</h3>
         </div>
       </div>
     </section>

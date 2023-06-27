@@ -6,6 +6,7 @@ import {
   BsWallet2,
   BsHourglassSplit,
   BsFillFileEarmarkTextFill,
+  BsFillHeartbreakFill,
 } from "react-icons/bs";
 
 import { FaHeart } from "react-icons/fa";
@@ -60,7 +61,6 @@ const Movie = () => {
       curtir (movieId, user.email)
     } else {
       descurtir(movieId, user.email)
-      console.log("chegou")
     }
   };
 
@@ -77,7 +77,9 @@ const Movie = () => {
               className={isFavorite ? 'heart-icon favorite' : 'heart-icon'}
               onClick={handleFavoriteClick}
               style={{ color: isFavorite ? 'red' : 'gray', cursor: "pointer", transition:"0.5s" }}
+          
             />
+          
           </div>
           <div className="info">
             <h3>

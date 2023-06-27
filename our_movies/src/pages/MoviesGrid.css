@@ -1,5 +1,5 @@
 .container{
-  display: fle;
+  display: grid;
   align-items: row center;
 }
 .container .title {
