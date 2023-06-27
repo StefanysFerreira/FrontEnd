@@ -2,7 +2,7 @@ import { createContext, useState } from 'react'
 import{ login, logout, registrar } from '../services/AuthService'
 
 const UserContext = createContext({
-  user: null,
+  userId: null,
   logado: false,
   handleLogin: () => { },
   handleLogout: () => { },
@@ -11,12 +11,11 @@ const UserContext = createContext({
 
 export function UserContextProvider(props) {
 
-  const [currentUser, setCurrentUser] = useState({ user: null, logado: true })
+  const [currentUser, setCurrentUser] = useState({ user: null, logado: false })
 
   async function handleRegistrar(nome, email, senha) {
     try {
-      const id = await registrar(nome, email, senha)
-    setCurrentUser({ user: id, logado: true })
+      const user = await registrar(nome, email, senha)
     } catch(error){
       throw Error(error.message)
     }
@@ -25,8 +24,8 @@ export function UserContextProvider(props) {
 
   async function handleLogin(email, senha) {
     try {
-      const id = await login(email, senha)
-    setCurrentUser({ userId: id, logado: true })
+      const user = await login(email, senha)
+    setCurrentUser({ user: user, logado: true })
     } catch(error){
       throw Error(error.message)
     }
@@ -39,7 +38,7 @@ export function UserContextProvider(props) {
   }
 
   const contexto = {
-    userId: currentUser.userId,
+    user: currentUser.user,
     logado: currentUser.logado,
     handleLogin,
     handleLogout,

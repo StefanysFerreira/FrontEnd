@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import {
@@ -8,10 +8,13 @@ import {
   BsFillFileEarmarkTextFill,
 } from "react-icons/bs";
 
+import { FaHeart } from "react-icons/fa";
+
 import MovieCard from "../components/MovieCard";
 
 import "./Movie.css";
-import Star from "../components/star";
+import { curtir, descurtir, obterCurtidas } from "../services/curtidasService";
+import UserContext from "../components/UserContext";
 
 const moviesURL = import.meta.env.VITE_API;
 const apiKey = import.meta.env.VITE_API_KEY;
@@ -20,6 +23,9 @@ const Movie = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const [movieId, setMovieId] = useState(null);
+  const {user} = useContext(UserContext)
+
 
   const getMovie = async (url) => {
     const res = await fetch(url);
@@ -38,11 +44,25 @@ const Movie = () => {
   useEffect(() => {
     const movieUrl = `${moviesURL}${id}?${apiKey}`;
     getMovie(movieUrl);
-  }, []);
+    setMovieId(id);
+  }, [id]);
 
-  function VoltarHome(){
+
+  function VoltarHome() {
     navigate("/")
   }
+
+  const [isFavorite, setIsFavorite] = useState(false);
+  const handleFavoriteClick = () => {
+    setIsFavorite(!isFavorite);
+    // Aqui você pode adicionar a lógica para adicionar/remover o filme da playlist de favoritos
+    if(!isFavorite){
+      curtir (movieId, user.email)
+    } else {
+      descurtir(movieId, user.email)
+      console.log("chegou")
+    }
+  };
 
   return (
     <div className="movie-page">
@@ -50,8 +70,14 @@ const Movie = () => {
         <>
           <MovieCard movie={movie} showLink={false} />
           <p className="tagline">{movie.tagline}</p>
-          <div className="rating">
-            <Star />
+
+          <div className="avaliar">
+            <h2>Adicionar o filme aos favoritos:</h2>
+            <FaHeart
+              className={isFavorite ? 'heart-icon favorite' : 'heart-icon'}
+              onClick={handleFavoriteClick}
+              style={{ color: isFavorite ? 'red' : 'gray', cursor: "pointer", transition:"0.5s" }}
+            />
           </div>
           <div className="info">
             <h3>
@@ -77,6 +103,7 @@ const Movie = () => {
             </h3>
             <p>{movie.overview}</p>
           </div>
+          
         </>
       )}
       <div className="retornar">

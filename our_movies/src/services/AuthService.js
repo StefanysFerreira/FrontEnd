@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword} from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
 
 import { app } from '../services/FirebaseConfig'
 import '../pages/EstiloLogin.css'
@@ -7,8 +7,8 @@ const auth = getAuth(app)
 
 export async function login(email, senha) {
     return await signInWithEmailAndPassword(auth, email, senha)
-    .then((userCredential) =>{
-    userCredential.user.uid
+    .then((userCredential) =>{ console.log(userCredential.user)
+    return userCredential.user
     })  
     .catch((error) => {
         if(error.code == 'auth/wrong-password') {
@@ -28,8 +28,9 @@ export async function logout(){
 export async function registrar(nome, email, senha) {
     return await createUserWithEmailAndPassword(auth, email, senha)
     .then((userCredential) =>{
-        updateProfile(userCredential, {displayName: nome})
-    userCredential.user.uid
+        updateProfile(auth.currentUser, {displayName: nome})
+        .then(() => {return userCredential.user})
+    
     })  
     .catch((error) => {
         if(error.code == 'auth/invalid-email') {
@@ -38,8 +39,6 @@ export async function registrar(nome, email, senha) {
             throw Error('Email já cadastrado!')
         }else if  (error.code == 'auth/empty-name'){
             throw Error('Nome Obrigatório!')
-        } else {
-            throw Error('Deu ruim')
         }
     })
 }

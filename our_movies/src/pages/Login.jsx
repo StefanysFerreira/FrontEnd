@@ -3,7 +3,6 @@ import LoginForm from "./LoginForm";
 import "./EstiloLogin.css"
 
 export default function Login(props) {
-    const navigate = useNavigate();
 
     function handleClick(event) {
         props.onLogin(event);

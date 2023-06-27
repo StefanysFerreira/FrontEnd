@@ -17,7 +17,7 @@ export default function LoginForm(props) {
     setErrorLogin("")
     try{
     await handleLogin(email, senha)
-    navigate("/")
+    // navigate("/")
     }catch(error) {
       setErrorLogin(error.message)
     }

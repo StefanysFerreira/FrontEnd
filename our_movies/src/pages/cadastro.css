@@ -14,6 +14,7 @@ body {
     padding: 5rem;
     color: white;
     padding-bottom: 0.2em;
+    padding-top: 2em;
 }
   
  input {
@@ -45,6 +46,11 @@ body {
     color: gray;
     font-size: 15px;
     margin-bottom: 16px;
+}
+
+.btnVoltarTela:hover {
+    background-color: #4F4F4F;
+    color: white;
 }
 
 .btnCadastro:hover {

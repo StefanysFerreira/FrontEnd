@@ -1,14 +1,21 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { BiCameraMovie, BiLogIn, BiLogInCircle, BiSearchAlt2 } from "react-icons/bi";
-
-import "./Navbar.css";
+import { BiCameraMovie, BiLogIn, BiSearchAlt2 } from "react-icons/bi";
 import { BsPerson } from "react-icons/bs";
+import UserContext from "./UserContext";
+import { useContext } from "react";
+import "./Navbar.css";
 
 
-const Navbar = () => {
+export default function Navbar () {
   const [search, setSearch] = useState("");
+  const { userId, handleLogout } = useContext(UserContext)
   const navigate = useNavigate();
+
+  async function handleSair (){
+    await handleLogout()
+    navigate("/")
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,16 +24,22 @@ const Navbar = () => {
 
     navigate(`/search?q=${search}`, { replace: true });
     setSearch("");
-  };
+
+    
+  }
 
   return (
     <nav id="navbar">
       <h2>
-        <Link to="/">
+        <Link className="btnGoHome" to="/">
           <BiCameraMovie /> OurMovies
         </Link>
       </h2>
+
       <form id="formBtn" onSubmit={handleSubmit}>
+        <Link className="btnPerfil" to='/perfil'>
+          <BsPerson />
+          </Link>       
         <input
           type="text"
           placeholder="Qual filme procura?"
@@ -40,14 +53,9 @@ const Navbar = () => {
         <BiSearchAlt2  type="submit"/>
         </Link> */}
        
-          <Link className="btnIconLogin" to="/login">
-          <BsPerson />
-          </Link>
-
+       <button onClick={handleSair}><BiLogIn/></button>
 
       </form>
     </nav>
   );
 };
-
-export default Navbar;

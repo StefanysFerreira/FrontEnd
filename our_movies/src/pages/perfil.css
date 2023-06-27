@@ -1,0 +1,23 @@
+.perfil {
+    flex-direction: column;
+}
+
+.nomeUsuario {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.user {
+    color: red;
+    padding-left: 6px;
+}
+
+.playlist {
+    text-align: center;
+    display: grid;
+}
+
+.mensagemPlaylist {
+    color: #f7d354;
+}

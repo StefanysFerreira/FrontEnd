@@ -1,0 +1,9 @@
+.mensagemErro{
+    text-align: center;
+    margin-top: 15rem;
+}
+
+.mensagem {
+    color: red;
+    font-size: 30px;
+}

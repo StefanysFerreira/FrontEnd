@@ -6,6 +6,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EmailSenha from '../components/emailSenha';
 import NomeUsuario from '../components/Nome'
+import Login from './Login';
 
 const CadastroForm = () => {
   const {register, handleSubmit, formState: {errors}} =useForm();
@@ -26,7 +27,7 @@ const CadastroForm = () => {
   
 
   function voltarTelaLogin(){
-    navigate("/login")
+    navigate('/')
   }
 
   return (
