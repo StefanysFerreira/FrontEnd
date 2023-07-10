@@ -1,10 +1,23 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import UserContext from "../components/UserContext"
+import { obterResultado } from "../services/obterResultado";
+
 
 import './perfil.css'
 
+const imagesURL = import.meta.env.VITE_IMG;
+
+
 export default function Perfil() {
  const {user} = useContext(UserContext)
+ const [filmesFavoritos, setFilmesFavoritos] = useState([])
+ useEffect(() => {
+  async function carrega(){
+    const favoritos = await obterResultado(user.email)
+    setFilmesFavoritos(favoritos)
+  }
+  carrega()
+ })
 
   return (
     <section>
@@ -15,9 +28,9 @@ export default function Perfil() {
         </div>
         <div className="playlist">
           <h2 className="mensagemPlaylist">Aqui estão seus filmes favoritos:</h2>
-          <h3>Não consegui fazer retornar os filmes</h3>
         </div>
       </div>
+      {filmesFavoritos.map((item, key) => <div key={key}>{item.id}</div>)}
     </section>
   )
 }

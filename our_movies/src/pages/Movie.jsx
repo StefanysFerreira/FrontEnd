@@ -25,8 +25,7 @@ const Movie = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [movieId, setMovieId] = useState(null);
-  const {user} = useContext(UserContext)
-
+  const { user, filmesFavoritos, setFavoritos } = useContext(UserContext);
 
   const getMovie = async (url) => {
     const res = await fetch(url);
@@ -48,19 +47,31 @@ const Movie = () => {
     setMovieId(id);
   }, [id]);
 
-
   function VoltarHome() {
-    navigate("/")
+    navigate("/");
   }
 
   const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    // Verifica se o filme está nos favoritos do usuário
+    if (filmesFavoritos.includes(movieId)) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [filmesFavoritos, movieId]);
+
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
-    // Aqui você pode adicionar a lógica para adicionar/remover o filme da playlist de favoritos
-    if(!isFavorite){
-      curtir (movieId, user.email)
+
+    // Adiciona ou remove o filme da lista de favoritos
+    if (!isFavorite) {
+      setFavoritos([...filmesFavoritos, movieId]);
+      curtir(movieId, user.email, movie.title);
     } else {
-      descurtir(movieId, user.email)
+      setFavoritos(filmesFavoritos.filter((id) => id !== movieId));
+      descurtir(movieId, user.email);
     }
   };
 
@@ -74,12 +85,14 @@ const Movie = () => {
           <div className="avaliar">
             <h2>Adicionar o filme aos favoritos:</h2>
             <FaHeart
-              className={isFavorite ? 'heart-icon favorite' : 'heart-icon'}
+              className={isFavorite ? "heart-icon favorite" : "heart-icon"}
               onClick={handleFavoriteClick}
-              style={{ color: isFavorite ? 'red' : 'gray', cursor: "pointer", transition:"0.5s" }}
-          
+              style={{
+                color: isFavorite ? "red" : "gray",
+                cursor: "pointer",
+                transition: "0.5s",
+              }}
             />
-          
           </div>
           <div className="info">
             <h3>
@@ -105,11 +118,12 @@ const Movie = () => {
             </h3>
             <p>{movie.overview}</p>
           </div>
-          
         </>
       )}
       <div className="retornar">
-        <button className="btnRetornar" onClick={VoltarHome}>Voltar ao início</button>
+        <button className="btnRetornar" onClick={VoltarHome}>
+          Voltar ao início
+        </button>
       </div>
     </div>
   );

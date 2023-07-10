@@ -12,6 +12,7 @@ const UserContext = createContext({
 export function UserContextProvider(props) {
 
   const [currentUser, setCurrentUser] = useState({ user: null, logado: false })
+  const [filmesFavoritos, setFavoritos] = useState([])
 
   async function handleRegistrar(nome, email, senha) {
     try {
@@ -40,6 +41,7 @@ export function UserContextProvider(props) {
   const contexto = {
     user: currentUser.user,
     logado: currentUser.logado,
+    filmesFavoritos, setFavoritos,
     handleLogin,
     handleLogout,
     handleRegistrar,
