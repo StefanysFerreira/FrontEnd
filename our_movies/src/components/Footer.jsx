@@ -1,5 +1,5 @@
 import { FaCopyright } from 'react-icons/fa'
-import './footer.css'
+import './Layout.css'
 
 export default function Footer() {
     return (
