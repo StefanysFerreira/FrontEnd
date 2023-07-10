@@ -21,3 +21,10 @@
 .mensagemPlaylist {
     color: #f7d354;
 }
+
+.playlist__filmes{
+    margin-top: 10px;
+    color: gray;
+    font-size: 20px;
+    text-align: center;
+}

@@ -30,7 +30,9 @@ export default function Perfil() {
           <h2 className="mensagemPlaylist">Aqui estão seus filmes favoritos:</h2>
         </div>
       </div>
-      {filmesFavoritos.map((item, key) => <div key={key}>{item.id}</div>)}
+      <div className="playlist__filmes">
+      {filmesFavoritos.map((item, key) => <div key={key}>{item.titulo}</div>)}
+      </div>
     </section>
   )
 }
