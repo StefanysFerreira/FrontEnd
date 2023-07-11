@@ -1,3 +1,5 @@
+import "../pages/EstiloLogin.css"
+
 export default function EmailSenha(props) {
     const validaEmail = {
         required: {
@@ -23,7 +25,7 @@ export default function EmailSenha(props) {
     return (
         <>
             <div className="Email">
-                <input
+                <input className="campo_Email_Usuario"
                     type="email"
                     id="email"
                     placeholder='Insira seu email'
@@ -33,7 +35,7 @@ export default function EmailSenha(props) {
             </div>
             <br></br>
             <div className="Senha">
-                <input
+                <input className="campo_Senha_Usuario"
                     type="password"
                     id="senha"
                     placeholder='Insira sua senha!'

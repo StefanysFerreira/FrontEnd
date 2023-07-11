@@ -30,6 +30,15 @@ body {
     margin-bottom: 1px;
     cursor: pointer;
   }
+
+  .campo_Email_Usuario{
+    border-radius: 10px;
+  }
+
+  .campo_Senha_Usuario{
+    border-radius: 10px;
+    padding-bottom: 15px;
+  }
   
   .btnEntrar:hover {
     background-color: #4F4F4F;

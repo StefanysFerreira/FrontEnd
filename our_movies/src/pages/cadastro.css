@@ -13,19 +13,19 @@ body {
     border-radius: 15px;
     padding: 5rem;
     color: white;
-    padding-bottom: 0.2em;
+    padding-bottom: 2em;
     padding-top: 2em;
 }
+
+.campo_Nome_Usuario{
+    border-radius: 10px;
+  }
   
  input {
     padding: 15px;
     border: none;
     outline: none;
     font-size: 15px;
-}
-
-.caixaNome {
-    padding-bottom: 16px;
 }
   
 .btnCadastro {

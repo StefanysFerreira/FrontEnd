@@ -1,3 +1,5 @@
+import "../pages/cadastro.css"
+
 export default function NomeUsuario(props) {
   const validaNomeUsuario = {
     required: {
@@ -8,7 +10,7 @@ export default function NomeUsuario(props) {
   return (
     <>
       <div className="NomeUsuario">
-        <input
+        <input className="campo_Nome_Usuario"
           type="nome"
           id="nome"
           placeholder='Insira seu nome'
